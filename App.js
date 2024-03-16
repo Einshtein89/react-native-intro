@@ -1,20 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { s } from "./App.style";
+import { CarbonTest } from "./components/CarbonTest/CarbonTest";
+import { ProfileCards } from "./components/ProfileCard/ProfileCards";
+import { AgeCounterStateTest } from "./components/AgeCounter/AgeCounterStateTest";
+import { Alert, Text, Platform, View } from "react-native";
+import { TemperatureConverter } from "./components/TemperatureConverter/TemperatureConverter";
+import { ToDoList } from "./components/ToDoList/ToDoList";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+      {/*<AgeCounterStateTest />*/}
+      {/*<ProfileCards />*/}
+      {/*<CarbonTest />*/}
+      {/*<TemperatureConverter />*/}
+      <ToDoList />
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
