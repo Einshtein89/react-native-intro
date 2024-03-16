@@ -3,8 +3,8 @@ import { StyleSheet } from "react-native";
 export const s = StyleSheet.create({
   btn: {
     position: "absolute",
+    alignSelf: "center",
     bottom: 60,
-    right: 20,
     backgroundColor: "#C2DAFF",
     paddingVertical: 15,
     paddingHorizontal: 30,

@@ -1,14 +1,15 @@
 import { Image, Text, TouchableOpacity } from "react-native";
 import checkImage from "../../../assets/check.png";
 import { s } from "./Card.style";
-import { useState } from "react";
 
 export const Card = ({ todo, onPress, onLongPress }) => {
-  // const [isStateChanged, setIsStateChanged] = useState(false);
   return (
     <TouchableOpacity
       style={s.card}
-      onPress={() => onPress(todo)}
+      onPress={() => {
+        todo.isStateChanged = !todo.isStateChanged;
+        onPress(todo);
+      }}
       onLongPress={() => onLongPress(todo)}
     >
       <Text

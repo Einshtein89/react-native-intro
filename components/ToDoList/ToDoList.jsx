@@ -15,6 +15,7 @@ import {
   saveTodoList,
   updateTodo,
 } from "./Utils/utils";
+import { ButtonSave } from "./Buttons/Save/ButtonSave";
 
 let isFirstRender = true;
 let isLoadUpdate = false;
@@ -25,16 +26,17 @@ export const ToDoList = () => {
   const [isAddDialogDisplayed, setIsAddDialogDisplayed] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const scrollViewRef = useRef();
-  // const [tempList, setTempList] = useState(todoList);
+  const [tempList, setTempList] = useState([]);
 
   useEffect(() => {
-    isLoadUpdate = loadTodoList(setTodoList, isLoadUpdate);
+    isLoadUpdate = loadTodoList(setTodoList, setTempList, isLoadUpdate);
+    setTempList(todoList);
   }, []);
 
   useEffect(() => {
     if (!isLoadUpdate) {
       if (!isFirstRender) {
-        saveTodoList(todoList);
+        saveTodoList(tempList);
       } else {
         isFirstRender = false;
       }
@@ -43,28 +45,25 @@ export const ToDoList = () => {
     }
   }, [todoList]);
 
-  const updateTodoHandler = (todo) => updateTodo(todo, todoList, setTodoList);
-
   const getFilteredTodoList = () => {
     switch (selectedTabName) {
       case "all":
-        return todoList;
+        return tempList;
       case "inProgress":
-        return todoList.filter((todo) => {
+        return tempList.filter((todo) => {
           // console.log("todo: " + todo.isCompleted);
           return !todo.isCompleted;
         });
       case "done":
-        return todoList.filter((todo) => todo.isCompleted);
+        return tempList.filter((todo) => todo.isCompleted);
     }
   };
-
-  const deleteTodoHandler = (todo) => deleteTodo(todo, setTodoList, todoList);
-
+  const updateTodoHandler = (todo) => updateTodo(todo, tempList, setTempList);
+  const deleteTodoHandler = (todo) => deleteTodo(todo, setTempList, tempList);
   const addTodoHandler = () =>
     addTodo(
       inputValue,
-      setTodoList,
+      setTempList,
       setIsAddDialogDisplayed,
       setInputValue,
       scrollViewRef
@@ -86,19 +85,14 @@ export const ToDoList = () => {
               />
             </ScrollView>
           </View>
-          {/*<ButtonSave*/}
-          {/*  onPress={() => {*/}
-          {/*    // const a = selectedTabName;*/}
-          {/*    updateTodoList();*/}
-          {/*    // updateTodo();*/}
-          {/*    setSelectedTabName("all");*/}
-          {/*    // setSelectedTabName(a);*/}
-          {/*    //*/}
-          {/*    // updateTodoList();*/}
-
-          {/*    // getFilteredTodoList();*/}
-          {/*  }}*/}
-          {/*/>*/}
+          {tempList.some((todo) => todo.isStateChanged) && (
+            <ButtonSave
+              onPress={() => {
+                tempList.forEach((todo) => (todo.isStateChanged = false));
+                setTodoList(tempList);
+              }}
+            />
+          )}
           {selectedTabName !== "done" && (
             <ButtonAdd onPress={() => setIsAddDialogDisplayed(true)} />
           )}
@@ -106,11 +100,10 @@ export const ToDoList = () => {
       </SafeAreaProvider>
       <View style={s.footer}>
         <Footer
-          todoList={todoList}
+          todoList={tempList}
           selectedTabName={selectedTabName}
           onPress={(tabName) => {
             setSelectedTabName(tabName);
-            // updateTodoList();
           }}
         />
       </View>

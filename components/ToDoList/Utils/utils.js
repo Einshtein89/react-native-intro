@@ -2,11 +2,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from "react-native";
 import uuid from "react-native-uuid";
 
-export async function loadTodoList(setTodoList, isLoadUpdate) {
+export async function loadTodoList(setTodoList, setTempList, isLoadUpdate) {
   try {
     const todoList = await AsyncStorage.getItem("@todoList");
     const parsedTodoList = JSON.parse(todoList);
     setTodoList(parsedTodoList || []);
+    setTempList(parsedTodoList || []);
     isLoadUpdate = true;
     return isLoadUpdate;
   } catch (e) {
@@ -22,7 +23,7 @@ export async function saveTodoList(todoList) {
   }
 }
 
-export function updateTodo(todo, todoList, setTodoList) {
+export function updateTodo(todo, todoList, setTempList) {
   const updatedTodo = {
     ...todo,
     // markedAsCompleted: !todo.markedAsCompleted,
@@ -33,8 +34,7 @@ export function updateTodo(todo, todoList, setTodoList) {
     (t) => t.id === updatedTodo.id
   );
   updatedTodoList[indexToUpdate] = updatedTodo;
-  // setTempList(updatedTodoList);
-  setTodoList(updatedTodoList);
+  setTempList(updatedTodoList);
 }
 
 export function deleteTodo(todoToDelete, setTodoList, todoList) {
@@ -62,6 +62,7 @@ export function addTodo(
     title: inputValue,
     isCompleted: false,
     markedAsCompleted: false,
+    isStateChanged: false,
   };
   setTodoList((prevState) => [...prevState, newTodo]);
   setIsAddDialogDisplayed(false);
