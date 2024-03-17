@@ -23,15 +23,11 @@ export const AddTodoModal = ({
 
   return (
     <Modal
-      // animationType="fade"
-      // transparent={true}
       isVisible={showAddDialog}
       onBackButtonPress={() => setIsAddDialogDisplayed(false)}
-      // onDismiss={() => setIsAddDialogDisplayed(false)}
-      // onRequestClose={() => {
-      //   Alert.alert("Modal has been closed.");
-      //   setIsAddDialogDisplayed(false);
-      // }}
+      animationOut={"slideOutUp"}
+      backdropTransitionOutTiming={0}
+      supportedOrientations={["portrait", "landscape"]}
       onBackdropPress={() => setIsAddDialogDisplayed(false)}
     >
       <View style={s.modalView}>

@@ -7,7 +7,6 @@ import { ScrollView } from "react-native";
 import { Footer } from "./Footer/Footer";
 import { useEffect, useRef, useState } from "react";
 import { ButtonAdd } from "./Buttons/Add/ButtonAdd";
-import { AddTodoDialog } from "./Dialogs/AddTodoDialog";
 import {
   addTodo,
   deleteTodo,
