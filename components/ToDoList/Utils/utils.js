@@ -37,13 +37,19 @@ export function updateTodo(todo, todoList, setTempList) {
   setTempList(updatedTodoList);
 }
 
-export function deleteTodo(todoToDelete, setTodoList, todoList) {
-  Alert.alert("Delete todo", "Are tou sure you want to delete this todo?", [
+export function deleteTodo(
+  todoToDelete,
+  setTempList,
+  tempList,
+  setHasDeletion
+) {
+  Alert.alert("Delete todo", "Are you sure you want to delete this todo?", [
     {
       text: "Delete",
       style: "destructive",
       onPress: () => {
-        setTodoList(todoList.filter((todo) => todo.id !== todoToDelete.id));
+        setHasDeletion(true);
+        setTempList(tempList.filter((todo) => todo.id !== todoToDelete.id));
       },
     },
     { text: "Cancel", style: "cancel" },

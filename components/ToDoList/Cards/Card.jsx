@@ -10,7 +10,9 @@ export const Card = ({ todo, onPress, onLongPress }) => {
         todo.isStateChanged = !todo.isStateChanged;
         onPress(todo);
       }}
-      onLongPress={() => onLongPress(todo)}
+      onLongPress={() => {
+        onLongPress(todo);
+      }}
     >
       <Text
         style={[

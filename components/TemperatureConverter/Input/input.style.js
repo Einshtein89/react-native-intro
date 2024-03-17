@@ -15,7 +15,6 @@ export const s = StyleSheet.create({
     flexDirection: "row",
     position: "absolute",
     alignSelf: "flex-end",
-    // alignItems: "flex-end",
   },
   unit: {
     paddingRight: 5,

@@ -16,6 +16,7 @@ import {
   updateTodo,
 } from "./Utils/utils";
 import { ButtonSave } from "./Buttons/Save/ButtonSave";
+import { AddTodoModal } from "./Modal/AddTodoModal";
 
 let isFirstRender = true;
 let isLoadUpdate = false;
@@ -25,6 +26,7 @@ export const ToDoList = () => {
   const [todoList, setTodoList] = useState([]);
   const [isAddDialogDisplayed, setIsAddDialogDisplayed] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const [hasDeletion, setHasDeletion] = useState(false);
   const scrollViewRef = useRef();
   const [tempList, setTempList] = useState([]);
 
@@ -59,7 +61,8 @@ export const ToDoList = () => {
     }
   };
   const updateTodoHandler = (todo) => updateTodo(todo, tempList, setTempList);
-  const deleteTodoHandler = (todo) => deleteTodo(todo, setTempList, tempList);
+  const deleteTodoHandler = (todo) =>
+    deleteTodo(todo, setTempList, tempList, setHasDeletion);
   const addTodoHandler = () =>
     addTodo(
       inputValue,
@@ -85,9 +88,10 @@ export const ToDoList = () => {
               />
             </ScrollView>
           </View>
-          {tempList.some((todo) => todo.isStateChanged) && (
+          {(tempList.some((todo) => todo.isStateChanged) || hasDeletion) && (
             <ButtonSave
               onPress={() => {
+                setHasDeletion(false);
                 tempList.forEach((todo) => (todo.isStateChanged = false));
                 setTodoList(tempList);
               }}
@@ -107,7 +111,7 @@ export const ToDoList = () => {
           }}
         />
       </View>
-      <AddTodoDialog
+      <AddTodoModal
         inputValue={inputValue}
         addTodo={addTodoHandler}
         setInputValue={setInputValue}
