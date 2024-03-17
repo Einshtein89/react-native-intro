@@ -41,14 +41,14 @@ export function deleteTodo(
   todoToDelete,
   setTempList,
   tempList,
-  setHasDeletion
+  setHasCountChanges
 ) {
   Alert.alert("Delete todo", "Are you sure you want to delete this todo?", [
     {
       text: "Delete",
       style: "destructive",
       onPress: () => {
-        setHasDeletion(true);
+        setHasCountChanges(true);
         setTempList(tempList.filter((todo) => todo.id !== todoToDelete.id));
       },
     },
@@ -61,7 +61,8 @@ export function addTodo(
   setTodoList,
   setIsAddDialogDisplayed,
   setInputValue,
-  scrollViewRef
+  scrollViewRef,
+  setHasCountChanges
 ) {
   const newTodo = {
     id: uuid.v4(),
@@ -73,6 +74,7 @@ export function addTodo(
   setTodoList((prevState) => [...prevState, newTodo]);
   setIsAddDialogDisplayed(false);
   setInputValue("");
+  setHasCountChanges(true);
   setTimeout(() => {
     scrollViewRef.current.scrollToEnd();
   }, 300);

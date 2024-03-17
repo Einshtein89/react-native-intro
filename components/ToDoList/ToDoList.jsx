@@ -25,7 +25,7 @@ export const ToDoList = () => {
   const [todoList, setTodoList] = useState([]);
   const [isAddDialogDisplayed, setIsAddDialogDisplayed] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const [hasDeletion, setHasDeletion] = useState(false);
+  const [hasCountChanges, setHasCountChanges] = useState(false);
   const scrollViewRef = useRef();
   const [tempList, setTempList] = useState([]);
 
@@ -61,14 +61,15 @@ export const ToDoList = () => {
   };
   const updateTodoHandler = (todo) => updateTodo(todo, tempList, setTempList);
   const deleteTodoHandler = (todo) =>
-    deleteTodo(todo, setTempList, tempList, setHasDeletion);
+    deleteTodo(todo, setTempList, tempList, setHasCountChanges);
   const addTodoHandler = () =>
     addTodo(
       inputValue,
       setTempList,
       setIsAddDialogDisplayed,
       setInputValue,
-      scrollViewRef
+      scrollViewRef,
+      setHasCountChanges
     );
 
   return (
@@ -87,10 +88,11 @@ export const ToDoList = () => {
               />
             </ScrollView>
           </View>
-          {(tempList.some((todo) => todo.isStateChanged) || hasDeletion) && (
+          {(tempList.some((todo) => todo.isStateChanged) ||
+            hasCountChanges) && (
             <ButtonSave
               onPress={() => {
-                setHasDeletion(false);
+                setHasCountChanges(false);
                 tempList.forEach((todo) => (todo.isStateChanged = false));
                 setTodoList(tempList);
               }}
