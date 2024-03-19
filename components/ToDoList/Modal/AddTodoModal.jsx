@@ -11,6 +11,7 @@ import {
 import Modal from "react-native-modal";
 import { globalStyle } from "../../GlobalStyles/global.style";
 import { s } from "./AddTodoModal.style";
+import { useRef } from "react";
 
 export const AddTodoModal = ({
   showAddDialog,
@@ -19,10 +20,17 @@ export const AddTodoModal = ({
   inputValue,
   addTodo,
 }) => {
+  const inputRef = useRef();
   const saveButtonDisabled = inputValue.length === 0;
+  const focusOnInput = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
 
   return (
     <Modal
+      onModalShow={focusOnInput}
       isVisible={showAddDialog}
       onBackButtonPress={() => setIsAddDialogDisplayed(false)}
       animationOut={"slideOutUp"}
@@ -33,6 +41,7 @@ export const AddTodoModal = ({
       <View style={s.modalView}>
         <Text style={s.modalText}>Add todo</Text>
         <TextInput
+          ref={inputRef}
           placeholder="Ex: Go to the dentist"
           style={s.input}
           onChangeText={setInputValue}

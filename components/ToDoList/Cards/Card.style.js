@@ -1,6 +1,10 @@
 import { StyleSheet } from "react-native";
 
 export const s = StyleSheet.create({
+  wrapper: {
+    height: 115,
+    borderRadius: 13,
+  },
   card: {
     backgroundColor: "white",
     height: 115,

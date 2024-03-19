@@ -4,6 +4,7 @@ import uuid from "react-native-uuid";
 
 export async function loadTodoList(setTodoList, setTempList, isLoadUpdate) {
   try {
+    // await AsyncStorage.removeItem("@todoList");
     const todoList = await AsyncStorage.getItem("@todoList");
     const parsedTodoList = JSON.parse(todoList);
     setTodoList(parsedTodoList || []);
@@ -37,7 +38,7 @@ export function updateTodo(todo, todoList, setTempList) {
   setTempList(updatedTodoList);
 }
 
-export function deleteTodo(
+export function deleteTodoWithAlert(
   todoToDelete,
   setTempList,
   tempList,
@@ -76,6 +77,8 @@ export function addTodo(
   setInputValue("");
   setHasCountChanges(true);
   setTimeout(() => {
-    scrollViewRef.current.scrollToEnd();
+    if (scrollViewRef.current) {
+      scrollViewRef.current.scrollToEnd();
+    }
   }, 300);
 }
