@@ -6,6 +6,7 @@ import { AgeCounterStateTest } from "./components/AgeCounter/AgeCounterStateTest
 import { Alert, Text, Platform, View } from "react-native";
 import { TemperatureConverter } from "./components/TemperatureConverter/TemperatureConverter";
 import { ToDoList } from "./components/ToDoList/ToDoList";
+import { Weather } from "./components/Weather/Weather";
 
 export default function App() {
   return (
@@ -14,7 +15,8 @@ export default function App() {
       {/*<ProfileCards />*/}
       {/*<CarbonTest />*/}
       {/*<TemperatureConverter />*/}
-      <ToDoList />
+      {/*<ToDoList />*/}
+      <Weather />
     </SafeAreaProvider>
   );
 }
