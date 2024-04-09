@@ -12,7 +12,7 @@ import {
   isIceTemperature,
 } from "./utils/temperature";
 import { ConvertButton } from "./ConvertButton/ConvertButton";
-import { TransformXWithSpringView } from "../Utils/TransformXWithSpringView";
+import { TransformXWithSpringView } from "../Animations/TransformXWithSpringView";
 import { ClearButton } from "./ClearButton/ClearButton";
 
 export const TemperatureConverter = () => {

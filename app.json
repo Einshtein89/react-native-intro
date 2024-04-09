@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "react-native-intro",
-    "slug": "react-native-intro",
+    "slug": "react-native-basics",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,14 +15,20 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.einshtein89.reactnativebasics"
     },
     "android": {
       "softwareKeyboardLayoutMode": "pan",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION"
+      ],
+      "package": "com.einshtein89.reactnativebasics"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -35,6 +41,18 @@
         }
       ],
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "82a29ef3-4793-4f0a-9417-4cb9a091b08e"
+      }
+    },
+    "owner": "einshtein89",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/82a29ef3-4793-4f0a-9417-4cb9a091b08e"
+    }
   }
 }

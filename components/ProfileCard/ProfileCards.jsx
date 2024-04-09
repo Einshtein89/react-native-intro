@@ -17,7 +17,7 @@ import { s } from "./ProfileCards.style";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FontAwesome } from "@expo/vector-icons";
 import { useEffect, useRef } from "react";
-import { TransformXWithSpringView } from "../Utils/TransformXWithSpringView";
+import { TransformXWithSpringView } from "../Animations/TransformXWithSpringView";
 
 const ProfileCard = ({
   firstName,
